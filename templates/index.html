@@ -4,179 +4,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Elekeeper Solar</title>
-
-    <link rel="icon" type="image/png" sizes="any" href="./logo.png?v=4">
-    <link rel="apple-touch-icon" href="./logo.png">
-    <link rel="stylesheet" href="./index.css?v=2">
-
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="stylesheet" href="./index.css?v=6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-
-    <div class="container">
-
-        <header class="header">
-            <div class="brand">
-                <img src="./logo.png" alt="Elekeeper Solar" class="logo">
-
-                <div>
-                    <h1>Elekeeper Solar</h1>
-                    <p class="subtitle">
-                        Monitoramento de Geração em Tempo Real
-                    </p>
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#overview"><img src="./logo.png" alt="" width="44" height="44">
+            <div>Elekeeper <strong>Solar</strong><small>ENERGY MONITOR</small></div>
+        </a>
+        <p class="nav-label">MONITORAMENTO</p>
+        <nav><a class="active" href="#overview"><i class="fa-solid fa-table-columns"></i> Visão geral</a><a
+                href="#production"><i class="fa-solid fa-chart-column"></i> Produção</a><a href="#impact"><i
+                    class="fa-solid fa-leaf"></i> Sustentabilidade</a></nav>
+        <p class="nav-label">CONTA</p>
+        <nav><a href="./login.html"><i class="fa-solid fa-user"></i> Acessar conta</a></nav>
+        <div class="sidebar-bottom"><i class="fa-solid fa-solar-panel"></i>
+            <div>Energia inteligente<small>Monitoramento solar</small></div>
+        </div>
+    </aside>
+    <main class="workspace" id="overview">
+        <header class="topbar">
+            <div class="top-title"><button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu"
+                    aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+                <div><span class="eyebrow">PAINEL DE CONTROLE</span>
+                    <h1>Visão geral</h1>
                 </div>
             </div>
-
-            <div class="header-actions">
-                <span id="status-badge" class="status-badge">
-                    <span class="status-dot"></span>
-                    Carregando...
-                </span>
-
-                <button onclick="atualizarDadosManualmente()" id="btn-refresh" class="refresh-button">
-                    <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
-                    Atualizar Agora
-                </button>
-            </div>
+            <div class="actions"><span id="status-badge" class="status-badge" role="status"><span
+                        class="status-dot"></span> Conectando...</span><button id="btn-refresh"
+                    onclick="atualizarDadosManualmente()"><i id="refresh-icon"
+                        class="fa-solid fa-arrows-rotate"></i><span>Atualizar</span></button><a class="profile"
+                    href="./login.html" aria-label="Acessar conta"><i class="fa-solid fa-user"></i></a></div>
         </header>
-
-        <main class="dashboard-grid">
-
-            <!-- Geração diária -->
-            <div class="card card-hoje">
-                <div class="card-icon">
-                    <i class="fa-solid fa-sun"></i>
-                </div>
-
-                <p class="card-title">Gerado Hoje</p>
-
-                <div class="card-value">
-                    <span id="val-hoje" class="value">0.0</span>
-                    <span class="unit">kWh</span>
-                </div>
-
-                <div class="card-description active-production">
-                    <i class="fa-solid fa-bolt"></i>
-                    Produção diária ativa
-                </div>
+        <section class="hero">
+            <div><span class="eyebrow">ENERGIA RENOVÁVEL</span>
+                <h2>Sua energia, seu futuro.</h2>
+                <p>Acompanhe o desempenho da sua instalação solar em um só lugar.</p>
+            </div><img src="./logo.png" alt="" width="130" height="130">
+        </section>
+        <section class="metrics" aria-label="Indicadores de geração">
+            <article class="metric gold">
+                <div class="metric-head"><span>Gerado hoje</span><i class="fa-solid fa-sun"></i></div>
+                <div class="metric-value"><strong id="val-hoje">—</strong> <small>kWh</small></div>
+                <p>Produção diária</p>
+            </article>
+            <article class="metric blue">
+                <div class="metric-head"><span>Gerado no mês</span><i class="fa-solid fa-calendar-days"></i></div>
+                <div class="metric-value"><strong id="val-mes">—</strong> <small>kWh</small></div>
+                <p>Acumulado do mês atual</p>
+            </article>
+            <article class="metric green">
+                <div class="metric-head"><span>Eletricidade total</span><i class="fa-solid fa-bolt"></i></div>
+                <div class="metric-value"><strong id="val-total">—</strong> <small>kWh</small></div>
+                <p>Desde a instalação</p>
+            </article>
+        </section>
+        <section class="panel" id="production">
+            <div class="panel-heading">
+                <div>
+                    <h2>Geração de energia</h2>
+                    <p>Histórico de produção</p>
+                </div><span class="period">Últimos 7 dias</span>
             </div>
-
-            <!-- Geração mensal -->
-            <div class="card card-mes">
-                <div class="card-icon">
-                    <i class="fa-solid fa-calendar-days"></i>
-                </div>
-
-                <p class="card-title">Gerado no Mês</p>
-
-                <div class="card-value">
-                    <span id="val-mes" class="value">0.0</span>
-                    <span class="unit">kWh</span>
-                </div>
-
-                <div class="card-description">
-                    Acumulado do período atual
-                </div>
+            <div class="chart">
+                <div class="chart-grid" aria-hidden="true"></div>
+                <div class="chart-empty"><i class="fa-solid fa-chart-column"></i><strong>Histórico
+                        indisponível</strong><span>Aguardando integração dos dados históricos.</span></div>
+                <div class="chart-labels" id="chart-labels" aria-hidden="true"></div>
             </div>
-
-            <!-- Geração total -->
-            <div class="card card-total">
-                <div class="card-icon">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-
-                <p class="card-title">Eletricidade Total</p>
-
-                <div class="card-value">
-                    <span id="val-total" class="value">0.0</span>
-                    <span class="unit">kWh</span>
-                </div>
-
-                <div class="card-description">
-                    Histórico total desde a instalação
-                </div>
-            </div>
-
-        </main>
-
-        <footer class="footer">
-            <div>
-                Última sincronização com Elekeeper:
-                <span id="val-update">-</span>
-            </div>
-
-            <div class="online-status">
-                <i class="fa-solid fa-shield-halved"></i>
-                Monitoramento Online
-            </div>
-        </footer>
-
-    </div>
-
+        </section>
+        <section class="impact" id="impact">
+            <article class="panel">
+                <div class="metric-head"><span>Economia estimada</span><i class="fa-solid fa-wallet"></i></div>
+                <div class="impact-value">R$ —</div>
+                <p>Necessário informar a tarifa de energia.</p>
+            </article>
+            <article class="panel">
+                <div class="metric-head"><span>Impacto ambiental</span><i class="fa-solid fa-leaf"></i></div>
+                <div class="impact-value">— <small>kg CO₂e</small></div>
+                <p>Aguardando fator de emissão para o cálculo.</p>
+            </article>
+        </section>
+        <footer><span>Última sincronização: <strong id="val-update">—</strong></span><span>Elekeeper Solar ·
+                Monitoramento de energia</span></footer>
+    </main>
     <script>
-        // Busca os dados atualizados da API Python
+        const badge = document.getElementById('status-badge');
+        function setStatus(text, state) {
+            badge.className = 'status-badge ' + state;
+            badge.replaceChildren();
+            const dot = document.createElement('span'); dot.className = 'status-dot';
+            badge.append(dot, document.createTextNode(' ' + text));
+        }
         async function carregarDadosDashboard() {
             try {
                 const resposta = await fetch('/api/dados');
+                if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
                 const dados = await resposta.json();
-
-                document.getElementById('val-hoje').innerText = dados.hoje;
-                document.getElementById('val-mes').innerText = dados.mes;
-                document.getElementById('val-total').innerText = dados.total;
-                document.getElementById('val-update').innerText = dados.ultima_atualizacao;
-
-                const badge = document.getElementById('status-badge');
-
-                badge.innerHTML = `
-                    <span class="status-dot status-animated"></span>
-                    ${dados.status}
-                `;
-
+                for (const [id, valor] of Object.entries({ 'val-hoje': dados.hoje, 'val-mes': dados.mes, 'val-total': dados.total, 'val-update': dados.ultima_atualizacao })) {
+                    document.getElementById(id).textContent = valor ?? '—';
+                }
+                setStatus(String(dados.status ?? 'API conectada'), 'connected');
             } catch (erro) {
-                console.error("Erro ao buscar dados da API local:", erro);
+                setStatus('API indisponível', 'offline');
+                console.error('Erro ao buscar dados da API local:', erro);
             }
         }
-
-        // Atualização manual dos dados
         async function atualizarDadosManualmente() {
             const btn = document.getElementById('btn-refresh');
             const icone = document.getElementById('refresh-icon');
-
-            btn.disabled = true;
-            icone.classList.add('fa-spin');
-
+            btn.disabled = true; icone.classList.add('fa-spin');
             try {
-                const resposta = await fetch('/api/atualizar', {
-                    method: 'POST'
-                });
-
+                const resposta = await fetch('/api/atualizar', { method: 'POST' });
+                if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
                 const resultado = await resposta.json();
-
-                if (resultado.sucesso) {
-                    carregarDadosDashboard();
-                } else {
-                    alert("Falha ao comunicar com os servidores da Elekeeper. Verifique os logs do Python.");
-                }
-
-            } catch (erro) {
-                alert("Erro ao processar requisição.");
-
-            } finally {
-                btn.disabled = false;
-                icone.classList.remove('fa-spin');
-            }
+                if (resultado.sucesso) await carregarDadosDashboard();
+                else setStatus('Falha na atualização', 'offline');
+            } catch (erro) { setStatus('Falha na atualização', 'offline'); console.error(erro); }
+            finally { btn.disabled = false; icone.classList.remove('fa-spin'); }
         }
-
-        // Atualização automática a cada 30 segundos
+        const menu = document.getElementById('menu-toggle');
+        menu.addEventListener('click', () => { const open = document.body.classList.toggle('menu-open'); menu.setAttribute('aria-expanded', String(open)); });
+        document.querySelectorAll('.sidebar nav a').forEach(a => a.addEventListener('click', () => { document.body.classList.remove('menu-open'); menu.setAttribute('aria-expanded', 'false'); }));
+        for (let i = 6; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); const s = document.createElement('span'); s.textContent = d.toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric' }); document.getElementById('chart-labels').append(s); }
         setInterval(carregarDadosDashboard, 30000);
-
-        // Carrega os dados ao abrir a página
         window.onload = carregarDadosDashboard;
     </script>
-
 </body>
 
 </html>
