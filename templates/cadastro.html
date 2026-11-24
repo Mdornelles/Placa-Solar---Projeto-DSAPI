@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Monitoramento Solar</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #121214; color: #e1e1e6; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .cadastro-container { background-color: #202024; padding: 2.5rem; border-radius: 8px; width: 100%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        h2 { text-align: center; margin-bottom: 1.5rem; color: #00b37e; font-size: 1.8rem; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; margin-bottom: 0.4rem; color: #a8a8b3; font-size: 0.9rem; }
+        .input-group input { width: 100%; padding: 0.8rem; border-radius: 4px; border: 1px solid #29292e; background-color: #121214; color: #e1e1e6; font-size: 1rem; outline: none; }
+        .input-group input:focus { border-color: #00b37e; }
+        .btn-submit { width: 100%; padding: 1rem; border: none; border-radius: 4px; background-color: #00b37e; color: #fff; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; }
+        .btn-submit:hover { background-color: #00875f; }
+        .error-alert { background-color: #f75a6820; border: 1px solid #f75a68; color: #f75a68; padding: 0.8rem; border-radius: 4px; margin-bottom: 1.2rem; font-size: 0.9rem; text-align: center; }
+        .footer-link { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #a8a8b3; }
+        .footer-link a { color: #00b37e; text-decoration: none; font-weight: bold; }
+        .footer-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="cadastro-container">
+        <h2>Criar Conta Solar</h2>
+
+        {% if error %}
+            <div class="error-alert">
+                ⚠️ {{ error }}
+            </div>
+        {% endif %}
+
+        <form action="/auth/cadastro" method="POST">
+            
+            <div class="input-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="senha">Senha (Mínimo 6 caracteres)</label>
+                <input type="password" id="senha" name="senha" placeholder="Crie uma senha forte" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmar_senha">Confirme sua Senha</label>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite a senha novamente" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Cadastrar Conta</button>
+        </form>
+
+        <div class="footer-link">
+            Já tem uma conta? <a href="/login">Faça Login</a>
+        </div>
+    </div>
+
+</body>
+</html>
