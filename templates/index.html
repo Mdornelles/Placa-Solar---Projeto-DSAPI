@@ -1,143 +1,179 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Energia Solar</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="index.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+<body>
 
-    <div class="container mx-auto px-4 py-8 max-w-5xl">
-        
-        <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-slate-800 pb-6 gap-4">
-            <div class="flex items-center gap-3">
-                <div class="bg-amber-500 text-slate-950 p-3 rounded-2xl shadow-lg shadow-amber-500/20 animate-pulse">
-                    <i class="fa-solid fa-solar-panel text-2xl"></i>
+    <div class="container">
+
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-solar-panel"></i>
                 </div>
+
                 <div>
-                    <h1 class="text-2xl font-bold tracking-tight bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Elekeeper Solar</h1>
-                    <p class="text-sm text-slate-400">Monitoramento de Geração em Tempo Real</p>
+                    <h1>Elekeeper Solar</h1>
+                    <p class="subtitle">
+                        Monitoramento de Geração em Tempo Real
+                    </p>
                 </div>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <span id="status-badge" class="text-xs px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-slate-400 flex items-center gap-2">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Carregando...
+
+            <div class="header-actions">
+                <span id="status-badge" class="status-badge">
+                    <span class="status-dot"></span>
+                    Carregando...
                 </span>
-                <button onclick="atualizarDadosManualmente()" id="btn-refresh" class="bg-slate-900 hover:bg-slate-800 border border-slate-700 px-4 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-2 cursor-pointer active:scale-95">
-                    <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i> Atualizar Agora
+
+                <button onclick="atualizarDadosManualmente()" id="btn-refresh" class="refresh-button">
+                    <i class="fa-solid fa-arrows-rotate" id="refresh-icon"></i>
+                    Atualizar Agora
                 </button>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            
-            <div class="bg-slate-900 border border-slate-800/80 p-6 rounded-2xl relative overflow-hidden group hover:border-amber-500/30 transition-all shadow-xl">
-                <div class="absolute top-0 right-0 p-6 opacity-10 text-6xl text-amber-500 group-hover:scale-110 transition-transform">
+        <main class="dashboard-grid">
+
+            <!-- Geração diária -->
+            <div class="card card-hoje">
+                <div class="card-icon">
                     <i class="fa-solid fa-sun"></i>
                 </div>
-                <p class="text-sm font-medium text-slate-400 mb-1">Gerado Hoje</p>
-                <div class="flex items-baseline gap-2">
-                    <span id="val-hoje" class="text-4xl font-extrabold tracking-tight text-amber-400">0.0</span>
-                    <span class="text-lg font-semibold text-slate-500">kWh</span>
+
+                <p class="card-title">Gerado Hoje</p>
+
+                <div class="card-value">
+                    <span id="val-hoje" class="value">0.0</span>
+                    <span class="unit">kWh</span>
                 </div>
-                <div class="mt-4 text-xs text-emerald-400 flex items-center gap-1">
-                    <i class="fa-solid fa-bolt"></i> Produção diária ativa
+
+                <div class="card-description active-production">
+                    <i class="fa-solid fa-bolt"></i>
+                    Produção diária ativa
                 </div>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800/80 p-6 rounded-2xl relative overflow-hidden group hover:border-sky-500/30 transition-all shadow-xl">
-                <div class="absolute top-0 right-0 p-6 opacity-10 text-6xl text-sky-500 group-hover:scale-110 transition-transform">
+            <!-- Geração mensal -->
+            <div class="card card-mes">
+                <div class="card-icon">
                     <i class="fa-solid fa-calendar-days"></i>
                 </div>
-                <p class="text-sm font-medium text-slate-400 mb-1">Gerado no Mês</p>
-                <div class="flex items-baseline gap-2">
-                    <span id="val-mes" class="text-4xl font-extrabold tracking-tight text-sky-400">0.0</span>
-                    <span class="text-lg font-semibold text-slate-500">kWh</span>
+
+                <p class="card-title">Gerado no Mês</p>
+
+                <div class="card-value">
+                    <span id="val-mes" class="value">0.0</span>
+                    <span class="unit">kWh</span>
                 </div>
-                <div class="mt-4 text-xs text-slate-400">
+
+                <div class="card-description">
                     Acumulado do período atual
                 </div>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800/80 p-6 rounded-2xl relative overflow-hidden group hover:border-emerald-500/30 transition-all shadow-xl">
-                <div class="absolute top-0 right-0 p-6 opacity-10 text-6xl text-emerald-500 group-hover:scale-110 transition-transform">
+            <!-- Geração total -->
+            <div class="card card-total">
+                <div class="card-icon">
                     <i class="fa-solid fa-chart-line"></i>
                 </div>
-                <p class="text-sm font-medium text-slate-400 mb-1">Eletricidade Total</p>
-                <div class="flex items-baseline gap-2">
-                    <span id="val-total" class="text-4xl font-extrabold tracking-tight text-emerald-400">0.0</span>
-                    <span class="text-lg font-semibold text-slate-500">kWh</span>
+
+                <p class="card-title">Eletricidade Total</p>
+
+                <div class="card-value">
+                    <span id="val-total" class="value">0.0</span>
+                    <span class="unit">kWh</span>
                 </div>
-                <div class="mt-4 text-xs text-slate-400">
+
+                <div class="card-description">
                     Histórico total desde a instalação
                 </div>
             </div>
 
-        </div>
+        </main>
 
-        <footer class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-900 pt-4">
-            <div>Última sincronização com Elekeeper: <span id="val-update" class="text-slate-400 font-medium">-</span></div>
-            <div class="flex items-center gap-1 text-emerald-500"><i class="fa-solid fa-shield-halved"></i> Monitoramento Online</div>
+        <footer class="footer">
+            <div>
+                Última sincronização com Elekeeper:
+                <span id="val-update">-</span>
+            </div>
+
+            <div class="online-status">
+                <i class="fa-solid fa-shield-halved"></i>
+                Monitoramento Online
+            </div>
         </footer>
 
     </div>
 
     <script>
-        // Função que vai na API do Python buscar os dados atualizados de tempos em tempos
+        // Busca os dados atualizados da API Python
         async function carregarDadosDashboard() {
             try {
                 const resposta = await fetch('/api/dados');
                 const dados = await resposta.json();
-                
-                // Atualiza os elementos da tela de forma suave
+
                 document.getElementById('val-hoje').innerText = dados.hoje;
                 document.getElementById('val-mes').innerText = dados.mes;
                 document.getElementById('val-total').innerText = dados.total;
                 document.getElementById('val-update').innerText = dados.ultima_atualizacao;
-                
-                // Status badge
+
                 const badge = document.getElementById('status-badge');
-                badge.innerHTML = `<span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span> ${dados.status}`;
+
+                badge.innerHTML = `
+                    <span class="status-dot status-animated"></span>
+                    ${dados.status}
+                `;
+
             } catch (erro) {
                 console.error("Erro ao buscar dados da API local:", erro);
             }
         }
 
-        // Função do Botão de atualizar manualmente
+        // Atualização manual dos dados
         async function atualizarDadosManualmente() {
             const btn = document.getElementById('btn-refresh');
             const icone = document.getElementById('refresh-icon');
-            
-            // Trava o botão e faz girar o ícone
+
             btn.disabled = true;
             icone.classList.add('fa-spin');
-            
+
             try {
-                const resposta = await fetch('/api/atualizar', { method: 'POST' });
+                const resposta = await fetch('/api/atualizar', {
+                    method: 'POST'
+                });
+
                 const resultado = await resposta.json();
-                
-                if(resultado.sucesso) {
+
+                if (resultado.sucesso) {
                     carregarDadosDashboard();
                 } else {
                     alert("Falha ao comunicar com os servidores da Elekeeper. Verifique os logs do Python.");
                 }
+
             } catch (erro) {
                 alert("Erro ao processar requisição.");
+
             } finally {
-                // Destrava o botão
                 btn.disabled = false;
                 icone.classList.remove('fa-spin');
             }
         }
 
-        // Fica puxando dados automaticamente a cada 30 segundos para manter a tela viva
+        // Atualização automática a cada 30 segundos
         setInterval(carregarDadosDashboard, 30000);
 
-        // Roda ao carregar a página pela primeira vez
+        // Carrega os dados ao abrir a página
         window.onload = carregarDadosDashboard;
     </script>
+
 </body>
 </html>
