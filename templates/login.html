@@ -1,63 +1,499 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Painel Solar</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Login | Elekeeper Solar</title>
+
+    <link rel="icon" type="image/png" href="./logo.png?v=10">
+    <link rel="apple-touch-icon" href="./logo.png">
+
+    <link rel="stylesheet" href="./login.css?v=1">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem('solar-theme') === 'light'
+                ? 'light'
+                : 'dark';
+    </script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center font-sans px-4">
 
-    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden">
-        
-        <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl"></div>
-        
-        <div class="text-center mb-8">
-            <div class="bg-amber-500 text-slate-950 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/20">
-                <i class="fa-solid fa-solar-panel text-2xl"></i>
-            </div>
-            <h1 class="text-2xl font-bold tracking-tight bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Área de Acesso</h1>
-            <p class="text-sm text-slate-400 mt-1">Entre para gerenciar seu sistema solar</p>
-        </div>
+<body>
 
-        {% if error %}
-        <div class="bg-red-500/10 border border-red-500/30 text-red-400 p-3.5 rounded-xl text-sm mb-5 flex items-center gap-2">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            {{ error }}
-        </div>
-        {% endif %}
+    <!-- Cabeçalho -->
 
-        <form action="/auth/login" method="POST" class="space-y-5">
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">E-mail</label>
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">
-                        <i class="fa-solid fa-envelope"></i>
-                    </span>
-                    <input type="email" name="email" required placeholder="seu@email.com" class="w-full bg-slate-950 border border-slate-800 focus:border-amber-500/50 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-100 outline-none transition-all placeholder:text-slate-600">
-                </div>
-            </div>
+    <header class="header">
+
+        <a class="brand" href="./index.html">
+
+            <img src="./logo.png" alt="Elekeeper Solar">
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Senha</label>
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">
-                        <i class="fa-solid fa-lock"></i>
-                    </span>
-                    <input type="password" name="senha" required placeholder="••••••••" class="w-full bg-slate-950 border border-slate-800 focus:border-amber-500/50 rounded-xl py-3 pl-11 pr-4 text-sm text-slate-100 outline-none transition-all placeholder:text-slate-600">
-                </div>
+                Elekeeper <strong>Solar</strong>
+                <small>ENERGY MONITOR</small>
             </div>
 
-            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-amber-500/10 active:scale-[0.98] mt-2 cursor-pointer">
-                Entrar no Painel <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
-            </button>
-            <p style="text-align: center; margin-top: 1rem; color: #a8a8b3;">
-            Não tem uma conta? <a href="/cadastro" style="color: #00b37e; text-decoration: none; font-weight: bold;">Cadastre-se</a>
+        </a>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema">
+
+            <i id="theme-icon" class="fa-solid fa-sun"></i>
+
+        </button>
+
+    </header>
+
+    <!-- Conteúdo principal -->
+
+    <main class="login-container">
+
+        <!-- Apresentação do sistema -->
+
+        <section class="presentation">
+
+            <div class="solar-illustration">
+
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit orbit-three"></div>
+
+                <img src="./logo.png" alt="">
+
+                <div class="floating-icon icon-energy">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <div class="floating-icon icon-leaf">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div class="floating-icon icon-chart">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+            </div>
+
+            <span class="eyebrow">
+                <i class="fa-solid fa-sun"></i>
+                ENERGIA INTELIGENTE
+            </span>
+
+            <h1>
+                Sua energia,<br>
+                <strong>seu futuro.</strong>
+            </h1>
+
+            <p class="description">
+                Monitore sua produção de energia solar,
+                acompanhe seus resultados e descubra uma
+                maneira mais inteligente de consumir energia.
             </p>
-        </form>
 
-    </div>
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>Monitoramento de energia</strong>
+                        <p>Acompanhe sua produção solar.</p>
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <div>
+                        <strong>Economia inteligente</strong>
+                        <p>Visualize seus resultados financeiros.</p>
+                    </div>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+
+                    <div>
+                        <strong>Energia sustentável</strong>
+                        <p>Contribua para um futuro mais limpo.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Área de login -->
+
+        <section class="login-card">
+
+            <div class="card-decoration"></div>
+
+            <div class="login-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="login-heading">
+
+                <span class="eyebrow">ÁREA DE ACESSO</span>
+
+                <h2>Bem-vindo de volta!</h2>
+
+                <p>Acesse sua conta para continuar.</p>
+
+            </div>
+
+            <!-- Mensagem de demonstração -->
+
+            <div class="message" id="message" role="status" aria-live="polite" hidden>
+
+                <i id="message-icon" class="fa-solid fa-circle-info"></i>
+
+                <span id="message-text"></span>
+
+            </div>
+
+            <!-- Formulário -->
+
+            <form id="login-form" action="/auth/login" method="POST">
+
+                <!-- E-mail -->
+
+                <div class="form-group">
+
+                    <label for="email">E-mail</label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-envelope input-icon"></i>
+
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="username"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <!-- Senha -->
+
+                <div class="form-group">
+
+                    <label for="senha">Senha</label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock input-icon"></i>
+
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
+                            autocomplete="current-password" required>
+
+                        <button type="button" class="password-toggle" id="password-toggle" aria-label="Mostrar senha"
+                            aria-pressed="false">
+
+                            <i id="password-icon" class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Lembrar e-mail -->
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input type="checkbox" id="remember-email">
+
+                        <span>Lembrar meu e-mail</span>
+
+                    </label>
+
+                </div>
+
+                <!-- Botão de acesso -->
+
+                <button type="submit" class="login-button" id="login-button">
+
+                    <span id="button-text">Entrar no painel</span>
+
+                    <i id="button-icon" class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+            <div class="separator"></div>
+
+            <!-- Cadastro -->
+
+            <p class="register-text">
+
+                Não tem uma conta?
+
+                <a href="./cadastro.html">Cadastre-se</a>
+
+            </p>
+
+            <!-- Voltar -->
+
+            <a href="./index.html" class="back-link">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Voltar ao dashboard
+
+            </a>
+
+            <div class="demo-notice">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                Ambiente de demonstração
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+
+    <footer class="footer">
+
+        <span>
+            &copy; <span id="year"></span> Elekeeper Solar
+        </span>
+
+        <span>
+            <i class="fa-solid fa-leaf"></i>
+            Energia para um futuro sustentável
+        </span>
+
+    </footer>
+
+    <script>
+
+        /* =====================================
+           MODO CLARO E ESCURO
+        ===================================== */
+
+        const themeToggle = document.getElementById('theme-toggle');
+
+        const themeIcon = document.getElementById('theme-icon');
+
+        function aplicarTema(tema) {
+
+            document.documentElement.dataset.theme = tema;
+
+            localStorage.setItem('solar-theme', tema);
+
+            themeIcon.className = tema === 'dark'
+                ? 'fa-solid fa-sun'
+                : 'fa-solid fa-moon';
+
+            themeToggle.title = tema === 'dark'
+                ? 'Ativar modo claro'
+                : 'Ativar modo escuro';
+
+            themeToggle.setAttribute(
+                'aria-label',
+                themeToggle.title
+            );
+
+        }
+
+        aplicarTema(
+            localStorage.getItem('solar-theme') === 'light'
+                ? 'light'
+                : 'dark'
+        );
+
+        themeToggle.addEventListener('click', () => {
+
+            const temaAtual = document.documentElement.dataset.theme;
+
+            aplicarTema(
+                temaAtual === 'dark' ? 'light' : 'dark'
+            );
+
+        });
+
+        /* =====================================
+           MOSTRAR E OCULTAR SENHA
+        ===================================== */
+
+        const senha = document.getElementById('senha');
+
+        const passwordToggle = document.getElementById('password-toggle');
+
+        const passwordIcon = document.getElementById('password-icon');
+
+        passwordToggle.addEventListener('click', () => {
+
+            const mostrar = senha.type === 'password';
+
+            senha.type = mostrar ? 'text' : 'password';
+
+            passwordIcon.className = mostrar
+                ? 'fa-solid fa-eye-slash'
+                : 'fa-solid fa-eye';
+
+            passwordToggle.setAttribute(
+                'aria-label',
+                mostrar ? 'Ocultar senha' : 'Mostrar senha'
+            );
+
+            passwordToggle.setAttribute(
+                'aria-pressed',
+                String(mostrar)
+            );
+
+        });
+
+        /* =====================================
+           LEMBRAR E-MAIL
+        ===================================== */
+
+        const email = document.getElementById('email');
+
+        const rememberEmail = document.getElementById('remember-email');
+
+        const emailSalvo = localStorage.getItem('solar-email');
+
+        if (emailSalvo) {
+
+            email.value = emailSalvo;
+
+            rememberEmail.checked = true;
+
+        }
+
+        rememberEmail.addEventListener('change', () => {
+
+            if (!rememberEmail.checked) {
+
+                localStorage.removeItem('solar-email');
+
+            }
+
+        });
+
+        /* =====================================
+           MENSAGENS
+        ===================================== */
+
+        const message = document.getElementById('message');
+
+        const messageText = document.getElementById('message-text');
+
+        const messageIcon = document.getElementById('message-icon');
+
+        function mostrarMensagem(texto, tipo) {
+
+            message.className = 'message ' + tipo;
+
+            messageText.textContent = texto;
+
+            messageIcon.className = tipo === 'error'
+                ? 'fa-solid fa-circle-exclamation'
+                : 'fa-solid fa-circle-info';
+
+            message.hidden = false;
+
+        }
+
+        /* =====================================
+           LOGIN DEMONSTRATIVO
+           Sem autenticação real
+        ===================================== */
+
+        const form = document.getElementById('login-form');
+
+        const loginButton = document.getElementById('login-button');
+
+        const buttonText = document.getElementById('button-text');
+
+        const buttonIcon = document.getElementById('button-icon');
+
+        form.addEventListener('submit', evento => {
+
+            evento.preventDefault();
+
+            message.hidden = true;
+
+            if (!email.value.trim() || !senha.value.trim()) {
+
+                mostrarMensagem(
+                    'Preencha todos os campos.',
+                    'error'
+                );
+
+                return;
+
+            }
+
+            if (rememberEmail.checked) {
+
+                localStorage.setItem(
+                    'solar-email',
+                    email.value.trim()
+                );
+
+            } else {
+
+                localStorage.removeItem('solar-email');
+
+            }
+
+            loginButton.disabled = true;
+
+            buttonText.textContent = 'Validando campos...';
+
+            buttonIcon.className = 'fa-solid fa-spinner fa-spin';
+
+            setTimeout(() => {
+
+                mostrarMensagem(
+                    'Campos validados. A autenticação real ainda não está disponível.',
+                    'info'
+                );
+
+                loginButton.disabled = false;
+
+                buttonText.textContent = 'Entrar no painel';
+
+                buttonIcon.className = 'fa-solid fa-arrow-right';
+
+            }, 700);
+
+        });
+
+        /* =====================================
+           ANO AUTOMÁTICO
+        ===================================== */
+
+        document.getElementById('year').textContent =
+            new Date().getFullYear();
+
+    </script>
 
 </body>
+
 </html>
