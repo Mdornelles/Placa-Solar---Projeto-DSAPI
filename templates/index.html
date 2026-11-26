@@ -1,138 +1,652 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Elekeeper Solar</title>
-    <link rel="icon" type="image/png" href="./logo.png">
-    <link rel="stylesheet" href="./index.css?v=6">
+
+    <link rel="icon" type="image/png" href="./logo.png?v=10">
+    <link rel="apple-touch-icon" href="./logo.png">
+
+    <link rel="stylesheet" href="./index.css?v=11">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Recuperar o tema salvo -->
+
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem('solar-theme') === 'light'
+                ? 'light'
+                : 'dark';
+    </script>
+
 </head>
 
 <body>
+
+    <!-- MENU LATERAL -->
+
     <aside class="sidebar" id="sidebar">
-        <a class="brand" href="#overview"><img src="./logo.png" alt="" width="44" height="44">
-            <div>Elekeeper <strong>Solar</strong><small>ENERGY MONITOR</small></div>
+
+        <a class="brand" href="#overview">
+
+            <img src="./logo.png" alt="Elekeeper Solar" width="44" height="44">
+
+            <div>
+                Elekeeper <strong>Solar</strong>
+                <small>ENERGY MONITOR</small>
+            </div>
+
         </a>
+
         <p class="nav-label">MONITORAMENTO</p>
-        <nav><a class="active" href="#overview"><i class="fa-solid fa-table-columns"></i> Visão geral</a><a
-                href="#production"><i class="fa-solid fa-chart-column"></i> Produção</a><a href="#impact"><i
-                    class="fa-solid fa-leaf"></i> Sustentabilidade</a></nav>
+
+        <nav>
+
+            <a class="active" href="#overview">
+                <i class="fa-solid fa-table-columns"></i>
+                Visão geral
+            </a>
+
+            <a href="#production">
+                <i class="fa-solid fa-chart-column"></i>
+                Produção
+            </a>
+
+            <a href="#impact">
+                <i class="fa-solid fa-leaf"></i>
+                Sustentabilidade
+            </a>
+
+        </nav>
+
         <p class="nav-label">CONTA</p>
-        <nav><a href="./login.html"><i class="fa-solid fa-user"></i> Acessar conta</a></nav>
-        <div class="sidebar-bottom"><i class="fa-solid fa-solar-panel"></i>
-            <div>Energia inteligente<small>Monitoramento solar</small></div>
+
+        <nav>
+
+            <a href="./login.html">
+                <i class="fa-solid fa-user"></i>
+                Acessar conta
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <i class="fa-solid fa-solar-panel"></i>
+
+            <div>
+                Energia inteligente
+                <small>Monitoramento solar</small>
+            </div>
+
         </div>
+
     </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
     <main class="workspace" id="overview">
+
+        <!-- CABEÇALHO -->
+
         <header class="topbar">
-            <div class="top-title"><button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu"
-                    aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-                <div><span class="eyebrow">PAINEL DE CONTROLE</span>
-                    <h1>Visão geral</h1>
-                </div>
-            </div>
-            <div class="actions"><span id="status-badge" class="status-badge" role="status"><span
-                        class="status-dot"></span> Conectando...</span><button id="btn-refresh"
-                    onclick="atualizarDadosManualmente()"><i id="refresh-icon"
-                        class="fa-solid fa-arrows-rotate"></i><span>Atualizar</span></button><a class="profile"
-                    href="./login.html" aria-label="Acessar conta"><i class="fa-solid fa-user"></i></a></div>
-        </header>
-        <section class="hero">
-            <div><span class="eyebrow">ENERGIA RENOVÁVEL</span>
-                <h2>Sua energia, seu futuro.</h2>
-                <p>Acompanhe o desempenho da sua instalação solar em um só lugar.</p>
-            </div><img src="./logo.png" alt="" width="130" height="130">
-        </section>
-        <section class="metrics" aria-label="Indicadores de geração">
-            <article class="metric gold">
-                <div class="metric-head"><span>Gerado hoje</span><i class="fa-solid fa-sun"></i></div>
-                <div class="metric-value"><strong id="val-hoje">—</strong> <small>kWh</small></div>
-                <p>Produção diária</p>
-            </article>
-            <article class="metric blue">
-                <div class="metric-head"><span>Gerado no mês</span><i class="fa-solid fa-calendar-days"></i></div>
-                <div class="metric-value"><strong id="val-mes">—</strong> <small>kWh</small></div>
-                <p>Acumulado do mês atual</p>
-            </article>
-            <article class="metric green">
-                <div class="metric-head"><span>Eletricidade total</span><i class="fa-solid fa-bolt"></i></div>
-                <div class="metric-value"><strong id="val-total">—</strong> <small>kWh</small></div>
-                <p>Desde a instalação</p>
-            </article>
-        </section>
-        <section class="panel" id="production">
-            <div class="panel-heading">
+
+            <div class="top-title">
+
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu"
+                    aria-expanded="false">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
                 <div>
+
+                    <span class="eyebrow">
+                        PAINEL DE CONTROLE
+                    </span>
+
+                    <h1>Visão geral</h1>
+
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <!-- STATUS -->
+
+                <span id="status-badge" class="status-badge" role="status">
+
+                    <span class="status-dot"></span>
+
+                    Conectando...
+
+                </span>
+
+                <!-- BOTÃO DE TEMA -->
+
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema">
+
+                    <i id="theme-icon" class="fa-solid fa-sun"></i>
+
+                </button>
+
+                <!-- BOTÃO ATUALIZAR -->
+
+                <button id="btn-refresh" type="button" onclick="atualizarDadosManualmente()">
+
+                    <i id="refresh-icon" class="fa-solid fa-arrows-rotate"></i>
+
+                    <span>Atualizar</span>
+
+                </button>
+
+                <!-- PERFIL -->
+
+                <a class="profile" href="./login.html" aria-label="Acessar conta">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <!-- BANNER PRINCIPAL -->
+
+        <section class="hero">
+
+            <div>
+
+                <span class="eyebrow">
+                    ENERGIA RENOVÁVEL
+                </span>
+
+                <h2>Sua energia, seu futuro.</h2>
+
+                <p>
+                    Acompanhe o desempenho da sua instalação
+                    solar em um só lugar.
+                </p>
+
+            </div>
+
+            <img src="./logo.png" alt="" width="130" height="130">
+
+        </section>
+
+        <!-- INDICADORES -->
+
+        <section class="metrics" aria-label="Indicadores de geração">
+
+            <!-- GERAÇÃO DIÁRIA -->
+
+            <article class="metric gold">
+
+                <div class="metric-head">
+
+                    <span>Gerado hoje</span>
+
+                    <i class="fa-solid fa-sun"></i>
+
+                </div>
+
+                <div class="metric-value">
+
+                    <strong id="val-hoje">—</strong>
+
+                    <small>kWh</small>
+
+                </div>
+
+                <p>Produção diária</p>
+
+            </article>
+
+            <!-- GERAÇÃO MENSAL -->
+
+            <article class="metric blue">
+
+                <div class="metric-head">
+
+                    <span>Gerado no mês</span>
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                </div>
+
+                <div class="metric-value">
+
+                    <strong id="val-mes">—</strong>
+
+                    <small>kWh</small>
+
+                </div>
+
+                <p>Acumulado do mês atual</p>
+
+            </article>
+
+            <!-- GERAÇÃO TOTAL -->
+
+            <article class="metric green">
+
+                <div class="metric-head">
+
+                    <span>Eletricidade total</span>
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                </div>
+
+                <div class="metric-value">
+
+                    <strong id="val-total">—</strong>
+
+                    <small>kWh</small>
+
+                </div>
+
+                <p>Desde a instalação</p>
+
+            </article>
+
+        </section>
+
+        <!-- GRÁFICO DE PRODUÇÃO -->
+
+        <section class="panel" id="production">
+
+            <div class="panel-heading">
+
+                <div>
+
                     <h2>Geração de energia</h2>
+
                     <p>Histórico de produção</p>
-                </div><span class="period">Últimos 7 dias</span>
+
+                </div>
+
+                <span class="period">Últimos 7 dias</span>
+
             </div>
+
             <div class="chart">
+
                 <div class="chart-grid" aria-hidden="true"></div>
-                <div class="chart-empty"><i class="fa-solid fa-chart-column"></i><strong>Histórico
-                        indisponível</strong><span>Aguardando integração dos dados históricos.</span></div>
+
+                <div class="chart-empty">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <strong>Histórico indisponível</strong>
+
+                    <span>
+                        Aguardando integração dos dados históricos.
+                    </span>
+
+                </div>
+
                 <div class="chart-labels" id="chart-labels" aria-hidden="true"></div>
+
             </div>
+
         </section>
+
+        <!-- ECONOMIA E SUSTENTABILIDADE -->
+
         <section class="impact" id="impact">
+
             <article class="panel">
-                <div class="metric-head"><span>Economia estimada</span><i class="fa-solid fa-wallet"></i></div>
-                <div class="impact-value">R$ —</div>
-                <p>Necessário informar a tarifa de energia.</p>
+
+                <div class="metric-head">
+
+                    <span>Economia estimada</span>
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <div class="impact-value">
+                    R$ —
+                </div>
+
+                <p>
+                    Necessário informar a tarifa de energia.
+                </p>
+
             </article>
+
             <article class="panel">
-                <div class="metric-head"><span>Impacto ambiental</span><i class="fa-solid fa-leaf"></i></div>
-                <div class="impact-value">— <small>kg CO₂e</small></div>
-                <p>Aguardando fator de emissão para o cálculo.</p>
+
+                <div class="metric-head">
+
+                    <span>Impacto ambiental</span>
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                </div>
+
+                <div class="impact-value">
+
+                    — <small>kg CO₂e</small>
+
+                </div>
+
+                <p>
+                    Aguardando fator de emissão para o cálculo.
+                </p>
+
             </article>
+
         </section>
-        <footer><span>Última sincronização: <strong id="val-update">—</strong></span><span>Elekeeper Solar ·
-                Monitoramento de energia</span></footer>
+
+        <!-- RODAPÉ -->
+
+        <footer>
+
+            <span>
+
+                Última sincronização:
+
+                <strong id="val-update">—</strong>
+
+            </span>
+
+            <span>
+                Elekeeper Solar · Monitoramento de energia
+            </span>
+
+        </footer>
+
     </main>
+
     <script>
-        const badge = document.getElementById('status-badge');
-        function setStatus(text, state) {
-            badge.className = 'status-badge ' + state;
-            badge.replaceChildren();
-            const dot = document.createElement('span'); dot.className = 'status-dot';
-            badge.append(dot, document.createTextNode(' ' + text));
+
+        /* =====================================
+           TEMA CLARO E ESCURO
+        ===================================== */
+
+        const themeToggle =
+            document.getElementById('theme-toggle');
+
+        const themeIcon =
+            document.getElementById('theme-icon');
+
+        function aplicarTema(tema) {
+
+            document.documentElement.dataset.theme = tema;
+
+            // Salva a escolha do usuário no navegador
+
+            localStorage.setItem('solar-theme', tema);
+
+            // Atualiza o ícone do botão
+
+            themeIcon.className = tema === 'dark'
+                ? 'fa-solid fa-sun'
+                : 'fa-solid fa-moon';
+
+            themeToggle.title = tema === 'dark'
+                ? 'Ativar modo claro'
+                : 'Ativar modo escuro';
+
+            themeToggle.setAttribute(
+                'aria-label',
+                themeToggle.title
+            );
+
         }
-        async function carregarDadosDashboard() {
-            try {
-                const resposta = await fetch('/api/dados');
-                if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
-                const dados = await resposta.json();
-                for (const [id, valor] of Object.entries({ 'val-hoje': dados.hoje, 'val-mes': dados.mes, 'val-total': dados.total, 'val-update': dados.ultima_atualizacao })) {
-                    document.getElementById(id).textContent = valor ?? '—';
-                }
-                setStatus(String(dados.status ?? 'API conectada'), 'connected');
-            } catch (erro) {
-                setStatus('API indisponível', 'offline');
-                console.error('Erro ao buscar dados da API local:', erro);
+
+        // Recupera o tema escolhido anteriormente
+
+        const temaSalvo = localStorage.getItem('solar-theme');
+
+        aplicarTema(
+            temaSalvo === 'light' ? 'light' : 'dark'
+        );
+
+        // Alterna entre claro e escuro
+
+        themeToggle.addEventListener('click', () => {
+
+            const temaAtual =
+                document.documentElement.dataset.theme;
+
+            const novoTema =
+                temaAtual === 'dark' ? 'light' : 'dark';
+
+            aplicarTema(novoTema);
+
+        });
+
+        // Sincroniza o tema entre abas abertas
+
+        window.addEventListener('storage', evento => {
+
+            if (evento.key === 'solar-theme') {
+
+                aplicarTema(
+                    evento.newValue === 'light'
+                        ? 'light'
+                        : 'dark'
+                );
+
             }
+
+        });
+
+        /* =====================================
+           STATUS DA API
+        ===================================== */
+
+        const badge = document.getElementById('status-badge');
+
+        function setStatus(text, state) {
+
+            badge.className = 'status-badge ' + state;
+
+            badge.replaceChildren();
+
+            const dot = document.createElement('span');
+
+            dot.className = 'status-dot';
+
+            badge.append(
+                dot,
+                document.createTextNode(' ' + text)
+            );
+
         }
-        async function atualizarDadosManualmente() {
-            const btn = document.getElementById('btn-refresh');
-            const icone = document.getElementById('refresh-icon');
-            btn.disabled = true; icone.classList.add('fa-spin');
+
+        /* =====================================
+           CARREGAR DADOS DO DASHBOARD
+        ===================================== */
+
+        async function carregarDadosDashboard() {
+
             try {
-                const resposta = await fetch('/api/atualizar', { method: 'POST' });
-                if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
-                const resultado = await resposta.json();
-                if (resultado.sucesso) await carregarDadosDashboard();
-                else setStatus('Falha na atualização', 'offline');
-            } catch (erro) { setStatus('Falha na atualização', 'offline'); console.error(erro); }
-            finally { btn.disabled = false; icone.classList.remove('fa-spin'); }
+
+                const resposta = await fetch('/api/dados');
+
+                if (!resposta.ok) {
+
+                    throw new Error('HTTP ' + resposta.status);
+
+                }
+
+                const dados = await resposta.json();
+
+                const valores = {
+
+                    'val-hoje': dados.hoje,
+
+                    'val-mes': dados.mes,
+
+                    'val-total': dados.total,
+
+                    'val-update': dados.ultima_atualizacao
+
+                };
+
+                for (const [id, valor] of Object.entries(valores)) {
+
+                    document.getElementById(id).textContent =
+                        valor ?? '—';
+
+                }
+
+                setStatus(
+                    String(dados.status ?? 'API conectada'),
+                    'connected'
+                );
+
+            } catch (erro) {
+
+                setStatus('API indisponível', 'offline');
+
+                console.error(
+                    'Erro ao buscar dados da API local:',
+                    erro
+                );
+
+            }
+
         }
+
+        /* =====================================
+           ATUALIZAÇÃO MANUAL
+        ===================================== */
+
+        async function atualizarDadosManualmente() {
+
+            const btn = document.getElementById('btn-refresh');
+
+            const icone = document.getElementById('refresh-icon');
+
+            btn.disabled = true;
+
+            icone.classList.add('fa-spin');
+
+            try {
+
+                const resposta = await fetch('/api/atualizar', {
+
+                    method: 'POST'
+
+                });
+
+                if (!resposta.ok) {
+
+                    throw new Error('HTTP ' + resposta.status);
+
+                }
+
+                const resultado = await resposta.json();
+
+                if (resultado.sucesso) {
+
+                    await carregarDadosDashboard();
+
+                } else {
+
+                    setStatus('Falha na atualização', 'offline');
+
+                }
+
+            } catch (erro) {
+
+                setStatus('Falha na atualização', 'offline');
+
+                console.error(erro);
+
+            } finally {
+
+                btn.disabled = false;
+
+                icone.classList.remove('fa-spin');
+
+            }
+
+        }
+
+        /* =====================================
+           MENU LATERAL
+        ===================================== */
+
         const menu = document.getElementById('menu-toggle');
-        menu.addEventListener('click', () => { const open = document.body.classList.toggle('menu-open'); menu.setAttribute('aria-expanded', String(open)); });
-        document.querySelectorAll('.sidebar nav a').forEach(a => a.addEventListener('click', () => { document.body.classList.remove('menu-open'); menu.setAttribute('aria-expanded', 'false'); }));
-        for (let i = 6; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); const s = document.createElement('span'); s.textContent = d.toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric' }); document.getElementById('chart-labels').append(s); }
+
+        menu.addEventListener('click', () => {
+
+            const open =
+                document.body.classList.toggle('menu-open');
+
+            menu.setAttribute(
+                'aria-expanded',
+                String(open)
+            );
+
+        });
+
+        document.querySelectorAll('.sidebar nav a')
+            .forEach(a => {
+
+                a.addEventListener('click', () => {
+
+                    document.body.classList.remove('menu-open');
+
+                    menu.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+
+                });
+
+            });
+
+        /* =====================================
+           DATAS DO GRÁFICO
+        ===================================== */
+
+        for (let i = 6; i >= 0; i--) {
+
+            const d = new Date();
+
+            d.setDate(d.getDate() - i);
+
+            const s = document.createElement('span');
+
+            s.textContent = d.toLocaleDateString('pt-BR', {
+
+                weekday: 'short',
+
+                day: 'numeric'
+
+            });
+
+            document.getElementById('chart-labels').append(s);
+
+        }
+
+        /* =====================================
+           ATUALIZAÇÃO AUTOMÁTICA
+        ===================================== */
+
         setInterval(carregarDadosDashboard, 30000);
-        window.onload = carregarDadosDashboard;
+
+        window.addEventListener(
+            'load',
+            carregarDadosDashboard
+        );
+
     </script>
+
 </body>
 
 </html>

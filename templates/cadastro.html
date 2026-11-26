@@ -1,66 +1,458 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - Monitoramento Solar</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #121214; color: #e1e1e6; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .cadastro-container { background-color: #202024; padding: 2.5rem; border-radius: 8px; width: 100%; max-width: 450px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        h2 { text-align: center; margin-bottom: 1.5rem; color: #00b37e; font-size: 1.8rem; }
-        .input-group { margin-bottom: 1.2rem; }
-        .input-group label { display: block; margin-bottom: 0.4rem; color: #a8a8b3; font-size: 0.9rem; }
-        .input-group input { width: 100%; padding: 0.8rem; border-radius: 4px; border: 1px solid #29292e; background-color: #121214; color: #e1e1e6; font-size: 1rem; outline: none; }
-        .input-group input:focus { border-color: #00b37e; }
-        .btn-submit { width: 100%; padding: 1rem; border: none; border-radius: 4px; background-color: #00b37e; color: #fff; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 0.5rem; }
-        .btn-submit:hover { background-color: #00875f; }
-        .error-alert { background-color: #f75a6820; border: 1px solid #f75a68; color: #f75a68; padding: 0.8rem; border-radius: 4px; margin-bottom: 1.2rem; font-size: 0.9rem; text-align: center; }
-        .footer-link { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #a8a8b3; }
-        .footer-link a { color: #00b37e; text-decoration: none; font-weight: bold; }
-        .footer-link a:hover { text-decoration: underline; }
-    </style>
+    <title>Cadastro | Elekeeper Solar</title>
+    <link rel="icon" type="image/png" href="./logo.png?v=10">
+    <link rel="apple-touch-icon" href="./logo.png">
+    <link rel="stylesheet" href="./cadastro.css?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Recuperar o tema salvo -->
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem('solar-theme') === 'light'
+                ? 'light'
+                : 'dark';
+    </script>
 </head>
+
 <body>
-
-    <div class="cadastro-container">
-        <h2>Criar Conta Solar</h2>
-
-        {% if error %}
-            <div class="error-alert">
-                ⚠️ {{ error }}
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <a class="brand" href="./index.html">
+            <img src="./logo.png" alt="Elekeeper Solar">
+            <div>
+                Elekeeper <strong>Solar</strong>
+                <small>ENERGY MONITOR</small>
             </div>
-        {% endif %}
-
-        <form action="/auth/cadastro" method="POST">
-            
-            <div class="input-group">
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema">
+            <i id="theme-icon" class="fa-solid fa-sun"></i>
+        </button>
+    </header>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="register-container">
+        <!-- APRESENTAÇÃO -->
+        <section class="presentation">
+            <div class="solar-illustration">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit orbit-three"></div>
+                <img src="./logo.png" alt="">
+                <div class="floating-icon icon-energy">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div class="floating-icon icon-leaf">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="floating-icon icon-chart">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
             </div>
-
-            <div class="input-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            <span class="eyebrow">
+                <i class="fa-solid fa-sun"></i>
+                COMECE SUA JORNADA
+            </span>
+            <h1>
+                Um futuro mais<br>
+                <strong>sustentável.</strong>
+            </h1>
+            <p class="description">
+                Crie sua conta e descubra uma nova maneira
+                de acompanhar, entender e aproveitar
+                sua energia solar.
+            </p>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <strong>Controle da sua energia</strong>
+                        <p>Acompanhe sua geração solar.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                        <strong>Economia inteligente</strong>
+                        <p>Entenda seus resultados financeiros.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-earth-americas"></i>
+                    </div>
+                    <div>
+                        <strong>Impacto positivo</strong>
+                        <p>Contribua para um planeta mais limpo.</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="input-group">
-                <label for="senha">Senha (Mínimo 6 caracteres)</label>
-                <input type="password" id="senha" name="senha" placeholder="Crie uma senha forte" required>
+        </section>
+        <!-- CARD DE CADASTRO -->
+        <section class="register-card">
+            <div class="card-decoration"></div>
+            <div class="register-icon">
+                <i class="fa-solid fa-user-plus"></i>
             </div>
-
-            <div class="input-group">
-                <label for="confirmar_senha">Confirme sua Senha</label>
-                <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite a senha novamente" required>
+            <div class="register-heading">
+                <span class="eyebrow">
+                    NOVA CONTA
+                </span>
+                <h2>Crie sua conta</h2>
+                <p>Preencha seus dados para começar.</p>
             </div>
-
-            <button type="submit" class="btn-submit">Cadastrar Conta</button>
-        </form>
-
-        <div class="footer-link">
-            Já tem uma conta? <a href="/login">Faça Login</a>
-        </div>
-    </div>
-
+            <!-- MENSAGENS -->
+            <div class="message" id="message" role="status" aria-live="polite" hidden>
+                <i id="message-icon" class="fa-solid fa-circle-info"></i>
+                <span id="message-text"></span>
+            </div>
+            <!-- FORMULÁRIO -->
+            <form id="register-form" action="/auth/cadastro" method="POST">
+                <!-- NOME -->
+                <div class="form-group">
+                    <label for="nome">
+                        Nome completo
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo"
+                            autocomplete="name" required>
+                    </div>
+                </div>
+                <!-- E-MAIL -->
+                <div class="form-group">
+                    <label for="email">
+                        E-mail
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email"
+                            required>
+                    </div>
+                </div>
+                <!-- SENHA -->
+                <div class="form-group">
+                    <label for="senha">
+                        Senha
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="senha" name="senha" placeholder="Crie uma senha"
+                            autocomplete="new-password" minlength="6" required>
+                        <button type="button" class="password-toggle" data-target="senha" aria-label="Mostrar senha"
+                            aria-pressed="false">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <!-- FORÇA DA SENHA -->
+                    <div class="password-strength">
+                        <div class="strength-track">
+                            <span id="strength-bar"></span>
+                        </div>
+                        <span id="strength-text" aria-live="polite">
+                            Mínimo de 6 caracteres
+                        </span>
+                    </div>
+                </div>
+                <!-- CONFIRMAR SENHA -->
+                <div class="form-group">
+                    <label for="confirmar_senha">
+                        Confirme sua senha
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="confirmar_senha" name="confirmar_senha"
+                            placeholder="Digite a senha novamente" autocomplete="new-password" required>
+                        <button type="button" class="password-toggle" data-target="confirmar_senha"
+                            aria-label="Mostrar senha" aria-pressed="false">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="match-message" id="match-message" aria-live="polite"></span>
+                </div>
+                <!-- BOTÃO DE CADASTRO -->
+                <button type="submit" class="register-button" id="register-button">
+                    <span id="button-text">
+                        Criar minha conta
+                    </span>
+                    <i id="button-icon" class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+            <div class="separator"></div>
+            <!-- LOGIN -->
+            <p class="login-text">
+                Já tem uma conta?
+                <a href="./login.html">Faça login</a>
+            </p>
+            <!-- VOLTAR AO DASHBOARD -->
+            <a href="./index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Voltar ao dashboard
+            </a>
+            <div class="demo-notice">
+                <i class="fa-solid fa-circle-info"></i>
+                Ambiente de demonstração
+            </div>
+        </section>
+    </main>
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <span>
+            &copy; <span id="year"></span> Elekeeper Solar
+        </span>
+        <span>
+            <i class="fa-solid fa-leaf"></i>
+            Energia para um futuro sustentável
+        </span>
+    </footer>
+    <script>
+        /* =====================================
+           MODO CLARO E ESCURO
+        \===================================== */
+        const themeToggle =
+            document.getElementById('theme-toggle');
+        const themeIcon =
+            document.getElementById('theme-icon');
+        function aplicarTema(tema, salvar = true) {
+            document.documentElement.dataset.theme = tema;
+            if (salvar) {
+                localStorage.setItem('solar-theme', tema);
+            }
+            themeIcon.className = tema === 'dark'
+                ? 'fa-solid fa-sun'
+                : 'fa-solid fa-moon';
+            themeToggle.title = tema === 'dark'
+                ? 'Ativar modo claro'
+                : 'Ativar modo escuro';
+            themeToggle.setAttribute(
+                'aria-label',
+                themeToggle.title
+            );
+        }
+        function recuperarTema() {
+            aplicarTema(
+                localStorage.getItem('solar-theme') === 'light'
+                    ? 'light'
+                    : 'dark',
+                false
+            );
+        }
+        recuperarTema();
+        themeToggle.addEventListener('click', () => {
+            const temaAtual =
+                document.documentElement.dataset.theme;
+            aplicarTema(
+                temaAtual === 'dark' ? 'light' : 'dark'
+            );
+        });
+        window.addEventListener('storage', evento => {
+            if (evento.key === 'solar-theme') {
+                recuperarTema();
+            }
+        });
+        window.addEventListener('pageshow', recuperarTema);
+        /* =====================================
+           MOSTRAR E OCULTAR SENHAS
+        \===================================== */
+        document.querySelectorAll('.password-toggle')
+            .forEach(botao => {
+                botao.addEventListener('click', () => {
+                    const campo = document.getElementById(
+                        botao.dataset.target
+                    );
+                    const icone = botao.querySelector('i');
+                    const mostrar = campo.type === 'password';
+                    campo.type = mostrar
+                        ? 'text'
+                        : 'password';
+                    icone.className = mostrar
+                        ? 'fa-solid fa-eye-slash'
+                        : 'fa-solid fa-eye';
+                    botao.setAttribute(
+                        'aria-label',
+                        mostrar
+                            ? 'Ocultar senha'
+                            : 'Mostrar senha'
+                    );
+                    botao.setAttribute(
+                        'aria-pressed',
+                        String(mostrar)
+                    );
+                });
+            });
+        /* =====================================
+           FORÇA DA SENHA
+        \===================================== */
+        const senha = document.getElementById('senha');
+        const confirmarSenha =
+            document.getElementById('confirmar_senha');
+        const strengthBar =
+            document.getElementById('strength-bar');
+        const strengthText =
+            document.getElementById('strength-text');
+        function verificarForcaSenha() {
+            const valor = senha.value;
+            let pontos = 0;
+            if (valor.length === 0) {
+                strengthBar.style.width = '0%';
+                strengthText.textContent =
+                    'Mínimo de 6 caracteres';
+                strengthText.className = '';
+                return;
+            }
+            if (valor.length >= 8) pontos++;
+            if (valor.length >= 12) pontos++;
+            if (/[A-Z]/.test(valor) &&
+                /[a-z]/.test(valor)) pontos++;
+            if (/[0-9]/.test(valor)) pontos++;
+            if (/[^A-Za-z0-9]/.test(valor)) pontos++;
+            let nivel;
+            if (valor.length < 8 || pontos <= 1) {
+                nivel = {
+                    largura: '25%',
+                    cor: '#ef4444',
+                    texto: 'Senha fraca',
+                    classe: 'weak'
+                };
+            } else if (pontos <= 3 || valor.length < 12) {
+                nivel = {
+                    largura: '60%',
+                    cor: '#f59e0b',
+                    texto: 'Senha média',
+                    classe: 'medium'
+                };
+            } else {
+                nivel = {
+                    largura: '100%',
+                    cor: '#22c55e',
+                    texto: 'Senha forte',
+                    classe: 'strong'
+                };
+            }
+            strengthBar.style.width = nivel.largura;
+            strengthBar.style.background = nivel.cor;
+            strengthText.textContent = nivel.texto;
+            strengthText.className = nivel.classe;
+        }
+        /* =====================================
+           CONFIRMAÇÃO DA SENHA
+        \===================================== */
+        const matchMessage =
+            document.getElementById('match-message');
+        function verificarSenhas() {
+            if (!confirmarSenha.value) {
+                matchMessage.textContent = '';
+                confirmarSenha.classList.remove(
+                    'valid',
+                    'invalid'
+                );
+                confirmarSenha.setCustomValidity('');
+                return false;
+            }
+            const iguais =
+                senha.value === confirmarSenha.value;
+            matchMessage.textContent = iguais
+                ? 'As senhas coincidem.'
+                : 'As senhas não coincidem.';
+            matchMessage.className = iguais
+                ? 'match-message valid-text'
+                : 'match-message invalid-text';
+            confirmarSenha.classList.toggle(
+                'valid',
+                iguais
+            );
+            confirmarSenha.classList.toggle(
+                'invalid',
+                !iguais
+            );
+            confirmarSenha.setCustomValidity(
+                iguais ? '' : 'As senhas não coincidem.'
+            );
+            return iguais;
+        }
+        senha.addEventListener('input', () => {
+            verificarForcaSenha();
+            verificarSenhas();
+        });
+        confirmarSenha.addEventListener(
+            'input',
+            verificarSenhas
+        );
+        /* =====================================
+           MENSAGENS DO FORMULÁRIO
+        \===================================== */
+        const message =
+            document.getElementById('message');
+        const messageText =
+            document.getElementById('message-text');
+        const messageIcon =
+            document.getElementById('message-icon');
+        function mostrarMensagem(texto, tipo) {
+            message.className = 'message ' + tipo;
+            messageText.textContent = texto;
+            messageIcon.className = tipo === 'error'
+                ? 'fa-solid fa-circle-exclamation'
+                : 'fa-solid fa-circle-info';
+            message.hidden = false;
+        }
+        /* =====================================
+           CADASTRO DEMONSTRATIVO
+           Sem integração com o back-end
+        \===================================== */
+        const form =
+            document.getElementById('register-form');
+        const registerButton =
+            document.getElementById('register-button');
+        const buttonText =
+            document.getElementById('button-text');
+        const buttonIcon =
+            document.getElementById('button-icon');
+        form.addEventListener('submit', evento => {
+            evento.preventDefault();
+            message.hidden = true;
+            const nome =
+                document.getElementById('nome').value.trim();
+            if (!nome) {
+                mostrarMensagem(
+                    'Informe seu nome.',
+                    'error'
+                );
+                return;
+            }
+            if (senha.value.length < 6) {
+                mostrarMensagem(
+                    'A senha precisa ter pelo menos 6 caracteres.',
+                    'error'
+                );
+                return;
+            }
+            if (!verificarSenhas()) {
+                mostrarMensagem(
+                    'As senhas não coincidem.',
+                    'error'
+                );
+                return;
+            }
+            registerButton.disabled = true;
+            buttonText.textContent = 'Validando dados...';
+            buttonIcon.className =
+                'fa-solid fa-spinner fa-spin';
+            setTimeout(() => {
+                window.location.href = './index.html';
+            }, 700);
+        });
+        /* =====================================
+           ANO AUTOMÁTICO
+        \===================================== */
+        document.getElementById('year').textContent =
+            new Date().getFullYear();
+    </script>
 </body>
+
 </html>
